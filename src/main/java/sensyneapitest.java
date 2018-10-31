@@ -4,6 +4,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Assert;
 
 import java.io.InputStream;
 
@@ -87,6 +88,7 @@ public class sensyneapitest {
         HttpResponse<InputStream> response = Unirest.delete(addProductURL+"/"+prod_id)
                 .asBinary();
         System.out.println("Delete status -->" + response.getStatus());
+        Assert.assertEquals("Delete Response code is not 200", 200, response.getStatus());
     }
 
    public static Boolean verifyRecordDeleted(int prod_id) throws UnirestException {
