@@ -24,7 +24,7 @@ public class sensyneteststepdef {
     }
 
     @Then("^The record should be added$")
-    public void thenIVerifyRecordIsAdded() throws UnirestException {
+    public void then_I_Verify_Record_Is_Added() throws UnirestException {
         Assert.assertTrue("Record not added ",sensyneapitest.verifyRecordAdded());
     }
 
@@ -33,8 +33,17 @@ public class sensyneteststepdef {
         sensyneapitest.updateRecord(prod_id,name,price_update);
     }
     @Then("^The record should be updated$")
-    public void thenIVerifyRecordIsUpdated() throws UnirestException {
+    public void then_I_Verify_Record_Is_Updated() throws UnirestException {
         Assert.assertTrue("Record not updated",sensyneapitest.verifyRecordAdded());
     }
 
+    @When("^I try to delete a record with product id (.*)$")
+    public void i_try_to_delete_record(String prod_id) throws UnirestException {
+        sensyneapitest.deleteRecord(prod_id);
+    }
+
+    @Then("^The record should be deleted with product id (.*)$")
+    public void then_I_Verify_Record_Is_Deleted(int prod_id) throws UnirestException {
+        Assert.assertTrue("Record not deleted",sensyneapitest.verifyRecordDeleted(prod_id));
+    }
 }

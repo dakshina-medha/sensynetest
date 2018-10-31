@@ -14,6 +14,10 @@ Feature: To do api testing on the application add, update and delete records
 
   @Update
   Scenario: Update an existing record
-    When I try to update a record with product id 5 and name Alpha and change price to 50.00
+    When I try to update a record with product id 21 and name Alpha and change price to 50.00
     Then The record should be updated
 
+  @Delete
+  Scenario: Delete an existing record
+    When I try to delete a record with product id 21
+    Then The record should be deleted with product id 21

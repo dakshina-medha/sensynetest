@@ -82,6 +82,34 @@ public class sensyneapitest {
         System.out.println("Update status -->" + response.getStatus());
     }
 
+    public static void deleteRecord(String prod_id) throws UnirestException {
+
+        HttpResponse<InputStream> response = Unirest.delete(addProductURL+"/"+prod_id)
+                .asBinary();
+        System.out.println("Delete status -->" + response.getStatus());
+    }
+
+   public static Boolean verifyRecordDeleted(int prod_id) throws UnirestException {
+        Boolean flag = true;
+        HttpResponse<JsonNode> output =  Unirest.get(getProductsURL).asJson();
+        JSONArray jsonArray = output.getBody().getArray();
+
+        int[] productIds = new int[jsonArray.length()];
+
+        for(int i=0;i<jsonArray.length();i++)
+        {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+            productIds [i] = jsonObject.getInt("id");
+
+           if(productIds[i]==prod_id){
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+
 }
 
 
