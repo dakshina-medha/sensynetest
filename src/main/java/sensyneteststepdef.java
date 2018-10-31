@@ -28,4 +28,13 @@ public class sensyneteststepdef {
         Assert.assertTrue("Record not added ",sensyneapitest.verifyRecordAdded());
     }
 
+    @When("^I try to update a record with product id (.*) and name (.*) and change price to (.*)$")
+    public void i_try_to_update_record(String prod_id,String name, Double price_update) throws UnirestException {
+        sensyneapitest.updateRecord(prod_id,name,price_update);
+    }
+    @Then("^The record should be updated$")
+    public void thenIVerifyRecordIsUpdated() throws UnirestException {
+        Assert.assertTrue("Record not updated",sensyneapitest.verifyRecordAdded());
+    }
+
 }

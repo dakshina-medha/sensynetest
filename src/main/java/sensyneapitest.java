@@ -70,6 +70,18 @@ public class sensyneapitest {
         return flag;
     }
 
+    public static void updateRecord(String prod_id,String name, Double price_update) throws UnirestException {
+
+        sensyneapitest.name = name;
+        sensyneapitest.price = price_update;
+
+        HttpResponse<InputStream> response = Unirest.put(addProductURL+"/"+prod_id)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .body("name="+name+"&price="+price_update)
+                .asBinary();
+        System.out.println("Update status -->" + response.getStatus());
     }
+
+}
 
 
